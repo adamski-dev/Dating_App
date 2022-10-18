@@ -13,6 +13,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Interfaces;
+using API.Services;
+using System.Net.NetworkInformation;
+using API.Extensions;
 
 namespace API
 {
@@ -27,13 +31,11 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContext<DataContext>(options => {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
-            
+            services.AddApplicationServices(_config);
             services.AddControllers();
-            //services.AddCors();
+            services.AddCors();
+            services.AddIdentityServices(_config);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,8 +46,10 @@ namespace API
 
             app.UseRouting();
 
-            //app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             // no need for this in my browser but required in the course
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
