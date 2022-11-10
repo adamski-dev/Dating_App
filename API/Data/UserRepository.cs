@@ -39,11 +39,6 @@ namespace API.Data
                 .Include(p => p.Photos)
                 .ToListAsync();
         }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
@@ -77,6 +72,12 @@ namespace API.Data
                 .Where(x => x.UserName == username)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
+        }
+        public async Task<String> GetUserGender(string username)
+        {
+            return await _context.Users
+                .Where(x => x.UserName == username)
+                .Select(x => x.Gender).FirstOrDefaultAsync();
         }
     }
 }
