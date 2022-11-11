@@ -37,6 +37,7 @@ namespace API.Data.Migrations
 
             foreach(var user in users)
             {
+                user.Photos.First().IsApproved = true;
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user, "Pass^^woRD$1");
                 await userManager.AddToRoleAsync(user, "Member");

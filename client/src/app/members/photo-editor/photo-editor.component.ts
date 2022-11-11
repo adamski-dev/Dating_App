@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
 import { MembersService } from 'src/app/_services/members.service';
 import { Photo } from 'src/app/_models/photo';
+import { ConfirmService } from 'src/app/_services/confirm.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -21,7 +22,8 @@ export class PhotoEditorComponent implements OnInit {
   baseUrl = environment.apiUrl;
   user: User;
 
-  constructor(private accountService: AccountService, private memberService: MembersService) {
+  constructor(private accountService: AccountService, private memberService: MembersService,
+      private confirmService: ConfirmService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
    }
 
@@ -46,8 +48,12 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   deletePhoto(photoId: number){
-    this.memberService.deletePhoto(photoId).subscribe(() => {
-      this.member.photos = this.member.photos.filter(x => x.id !== photoId);
+    this.confirmService.confirm('Confirm delete photo, This cannot be undone').subscribe(ok => {
+      if(ok){
+          this.memberService.deletePhoto(photoId).subscribe(() => {
+          this.member.photos = this.member.photos.filter(x => x.id !== photoId);
+        })
+      }
     })
   }
 

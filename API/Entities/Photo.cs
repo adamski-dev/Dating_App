@@ -12,8 +12,9 @@ namespace API.Entities
         public int Id { get; set; }
         public string Url {get; set;}
         public bool IsMain {get; set;}
+        public bool IsApproved {get; set;}
         public string PublicId {get; set;}
-        public AppUser AppUser {get; set;} // fully defining relationship between Photos and AppUser
-        public int AppUserId {get; set;} // fully defining relationship between Photos and AppUser
+        public AppUser AppUser {get; set;}
+        public int AppUserId {get; set;}
     }
 }
