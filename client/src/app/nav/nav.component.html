@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
         </button> -->
         <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-auto">
                 <ng-container  *ngIf="accountService.currentUser$ | async">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
@@ -27,7 +27,7 @@
 
             <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
                 <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.photoUrl}}">
-                <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{ user.knownAs || user.username | titlecase }} </a>
+                <a class="dropdown-toggle text-light ms-2 text-decoration-none" dropdownToggle>Welcome {{ user.knownAs || user.username | titlecase }} </a>
                 <div class="dropdown-menu mt-3" *dropdownMenu>
                     <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
                     <div class="div dropdown-divider"></div>
@@ -35,19 +35,19 @@
                 </div>
             </div>
 
-            <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()" class="form-inline mt-2 mt-md-0"
+            <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()" class="d-flex mt-2 mt-md-0"
                 autocomplete="off">
                 <input 
                     name="username"
                     [(ngModel)]="model.username"
-                    class="form-control-sm mr-sm-2" 
+                    class="form-control-sm me-sm-2" 
                     type="text" 
                     placeholder="Username"
                     >
                 <input 
                     name="password"
                     [(ngModel)]="model.password"
-                    class="form-control-sm mr-sm-2" 
+                    class="form-control-sm me-sm-2" 
                     type="password" 
                     placeholder="Password">
                 <button class="btn btn-sm btn-success my-2 my-sm-0" type="submit">Login</button>

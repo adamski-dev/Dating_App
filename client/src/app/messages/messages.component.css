@@ -1,20 +1,3 @@
 .img-circle {
     max-height: 50px;
 }
-
-.btn-danger {
-    --bs-btn-color: #bf002b;
-    --bs-btn-bg: #ff0039;
-    --bs-btn-border-color: #ff0039;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #d90030;
-    --bs-btn-hover-border-color: #cc002e;
-    --bs-btn-focus-shadow-rgb: 255, 38, 87;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #cc002e;
-    --bs-btn-active-border-color: #bf002b;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #ff0039;
-    --bs-btn-disabled-border-color: #ff0039;
-  }
